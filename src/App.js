@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { func, shape, arrayOf, string, objectOf, array, object } from 'prop-types';
 import './App.css';
 
 import { quotes, seasons, chars} from './quotes/bq';
@@ -9,15 +9,15 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 
 	return class extends Component {
 
-		static displayName = `withBuffyQuotes(${ UnWrappedComponent.displayName || UnWrappedComponent.name })`
+		static displayName = `withBuffyQuotes(${ UnWrappedComponent.displayName || UnWrappedComponent.name })`;
 
 		state = {
 			quotes,
 			seasons,
 			chars,
 			filters : {
-				id : '',
-				season : ''
+				id : '6',
+				season : '7'
 			},
 			selectedQuotes : {}
 		};
@@ -47,14 +47,11 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 			}
 
 			if (season) {
-				// filterQuotesObject = Object.keys(filterQuotesObject).map((person) => {
 				Object.keys(filterQuotesObject).forEach((person) => {
 
-					const seasonQuotes = filterQuotesObject[person].filter((quote) => {
+					filterQuotesObject[person] = filterQuotesObject[person].filter((quote) => {
 						return quote.season === season;
 					});
-
-					filterQuotesObject[person] = seasonQuotes;
 
 				});
 
@@ -87,6 +84,12 @@ class SeasonSelector extends Component {
 		value : this.props.value
 	};
 
+	static propTypes = {
+		onUpdate : func.isRequired,
+		seasons : arrayOf(string).isRequired,
+		value : string.isRequired
+	};
+
 	handleSeasonUpdate = ({target}) => {
 
 		this.setState({
@@ -101,7 +104,7 @@ class SeasonSelector extends Component {
 
 	render() {
 
-		const { handleSeasonUpdate, seasons } = this.props;
+		const { seasons } = this.props;
 
 		return (
 			<select value={this.state.value} onChange={ this.handleSeasonUpdate }>
@@ -120,26 +123,74 @@ class SeasonSelector extends Component {
 
 }
 
-const BuffyTest = (props) => {
+class CharSelector extends Component {
+	state = {
+		value : this.props.value
+	};
 
-	const { selectedQuotes, seasons, quotes, filterQuotes, chars, updateFilters, filters } = props;
+	static propTypes = {
+	    value : string.isRequired,
+        onUpdate : func.isRequired,
+        chars : arrayOf(string).isRequired
+    };
+
+	handleCharUpdate = ({ target }) => {
+
+		this.setState({
+			value : target.value
+		})
+
+		this.props.onUpdate({
+			id : target.value
+		});
+
+	};
+
+	render() {
+		const { chars } = this.props;
+
+		return (
+			<select
+				value={ this.state.value }
+				onChange={ this.handleCharUpdate }
+			>
+				<option value="">All</option>
+				{
+					chars.map((char, idx) => {
+						return (
+							<option value={ idx }> { char } </option>
+						);
+					})
+				}
+			</select>
+		);
+	}
+}
+
+const ShowQuotes = (props) => {
+
+	const { selectedQuotes, seasons, chars, updateFilters, filters } = props;
 
 
 	const quoteChars = Object.keys(selectedQuotes);
+	const showChars = Object.keys(chars).map((key) => chars[key]);
 
 	return (
 		<div style={{textAlign : 'left'}}>
+			<CharSelector
+				chars={ showChars }
+				value={ filters.season }
+				onUpdate={ updateFilters }
+			/>
 			<SeasonSelector
 				seasons={ seasons }
 				value={ filters.season }
-				onUpdate={ updateFilters } />
+				onUpdate={ updateFilters }
+			/>
 			{
 				quoteChars.map((quoteChar) => {
 					const name = chars[quoteChar];
 					const hasQuotes = selectedQuotes[quoteChar].length;
-
-					// console.log(selectedQuotes[quoteChar])
-					// return null;
 
 					if (hasQuotes === 0) {
 						return null;
@@ -152,7 +203,7 @@ const BuffyTest = (props) => {
 								{
 									selectedQuotes[quoteChar].map((quote) => {
 										return (
-											<li>{quote.quote} - <em>Season {quote.season}</em></li>
+											<li>{ quote.quote } - <strong>Season { quote.season }</strong></li>
 										)
 									})
 								}
@@ -168,22 +219,68 @@ const BuffyTest = (props) => {
 
 }
 
-const WrappedBuffyTest = withBuffyQuotes(BuffyTest);
+ShowQuotes.propTypes = {
+    selectedQuotes : objectOf(array).isRequired,
+    seasons : arrayOf(string).isRequired,
+    chars : object.isRequired,
+    updateFilters : func.isRequired,
+    filters : shape({
+        id : string,
+        season : string
+    }).isRequired
+}
+
+const BuffyQuotes = withBuffyQuotes(ShowQuotes);
+
+const fringeQuotes = {
+    '0' : [
+        {
+            quote : 'something something peter',
+            season : '4'
+        },
+        {
+            quote : 'something something old man',
+            season : '2'
+        }
+    ]
+};
+
+const fringeSeasons = [ '1', '2', '3'];
+
+const fringeChars = {
+    '0' : 'Olivia',
+    '1' : 'Peter'
+};
+
+const fringeUpdateFilters = (stuff) => {
+    console.log(stuff);
+};
+
+const fringeFilters = {
+    id : '',
+    season : ''
+};
+
+const EvenMoreBuffy = (props) => {
+	return(
+		<pre>
+		    <code>{JSON.stringify(props, null, 4)}</code>
+		</pre>
+	)
+}
+
+const MoreBuffy = withBuffyQuotes(EvenMoreBuffy);
+
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-	      <WrappedBuffyTest stuff="this is some stuff"/>
-      </div>
+	      <MoreBuffy/>
+        <BuffyQuotes stuff="this is some stuff"/>
+        <ShowQuotes selectedQuotes={ fringeQuotes } seasons={ fringeSeasons } chars={ fringeChars } updateFilters={ fringeUpdateFilters} filters={ fringeFilters}/>
+        </div>
     );
   }
 }
