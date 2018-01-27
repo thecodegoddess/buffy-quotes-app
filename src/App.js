@@ -17,7 +17,7 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 			chars,
 			filters : {
 				id : '6',
-				season : '7'
+				season : '1'
 			},
 			selectedQuotes : {}
 		};
@@ -138,7 +138,7 @@ class CharSelector extends Component {
 
 		this.setState({
 			value : target.value
-		})
+		});
 
 		this.props.onUpdate({
 			id : target.value
@@ -179,7 +179,7 @@ const ShowQuotes = (props) => {
 		<div style={{textAlign : 'left'}}>
 			<CharSelector
 				chars={ showChars }
-				value={ filters.season }
+				value={ filters.id }
 				onUpdate={ updateFilters }
 			/>
 			<SeasonSelector
@@ -232,55 +232,46 @@ ShowQuotes.propTypes = {
 
 const BuffyQuotes = withBuffyQuotes(ShowQuotes);
 
-const fringeQuotes = {
-    '0' : [
-        {
-            quote : 'something something peter',
-            season : '4'
-        },
-        {
-            quote : 'something something old man',
-            season : '2'
-        }
-    ]
-};
-
-const fringeSeasons = [ '1', '2', '3'];
-
-const fringeChars = {
-    '0' : 'Olivia',
-    '1' : 'Peter'
-};
-
-const fringeUpdateFilters = (stuff) => {
-    console.log(stuff);
-};
-
-const fringeFilters = {
-    id : '',
-    season : ''
-};
-
 const EvenMoreBuffy = (props) => {
+	const { selectedQuotes, seasons, chars, updateFilters, filters } = props;
+
+
+	const quoteChars = Object.keys(selectedQuotes);
+	const showChars = Object.keys(chars).map((key) => chars[key]);
 	return(
-		<pre>
-		    <code>{JSON.stringify(props, null, 4)}</code>
+		<div style={{textAlign : 'left'}}>
+			<CharSelector
+				chars={ showChars }
+				value={ filters.id }
+				onUpdate={ updateFilters }
+			/>
+			<SeasonSelector
+				seasons={ seasons }
+				value={ filters.season }
+				onUpdate={ updateFilters }
+			/>
+			<pre>
+		    <code>{JSON.stringify(selectedQuotes, null, 4)}</code>
 		</pre>
+		</div>
 	)
 }
 
 const MoreBuffy = withBuffyQuotes(EvenMoreBuffy);
 
-
 class App extends Component {
 
   render() {
+
+
     return (
       <div className="App">
-	      <MoreBuffy/>
+
+
+	      <MoreBuffy />
+
         <BuffyQuotes stuff="this is some stuff"/>
-        <ShowQuotes selectedQuotes={ fringeQuotes } seasons={ fringeSeasons } chars={ fringeChars } updateFilters={ fringeUpdateFilters} filters={ fringeFilters}/>
-        </div>
+      </div>
     );
   }
 }
