@@ -7,7 +7,21 @@ export const chars = {
 	'5' : 'anya',
 	'6' : 'angel',
 	'7' : 'cordelia',
-	'8' : 'drusilla'
+	'8' : 'drusilla',
+	'9' : 'faith',
+};
+
+export const images = {
+	'0' : process.env.PUBLIC_URL + '/images/buffy.jpeg',
+	'1' : process.env.PUBLIC_URL + '/images/spike.jpeg',
+	'2' : process.env.PUBLIC_URL + '/images/willow.jpeg',
+	'3' : process.env.PUBLIC_URL + '/images/xander.jpeg',
+	'4' : process.env.PUBLIC_URL + '/images/giles.jpeg',
+	'5' : process.env.PUBLIC_URL + '/images/anya.jpeg',
+	'6' : process.env.PUBLIC_URL + '/images/angel.jpeg',
+	'7' : process.env.PUBLIC_URL + '/images/cordelia.jpeg',
+	'8' : process.env.PUBLIC_URL + '/images/drusilla.jpeg',
+	'9' : process.env.PUBLIC_URL + '/images/faith.jpeg',
 };
 
 export const seasons = ['1', '2', '3', '4', '5', '6', '7'];
@@ -2837,7 +2851,61 @@ export const quotes = {
 			'quote' : 'Such a pretty house you have, sweet William. It smells of daffodils... and viscera',
 			'season' : '7'
 		}
-	]
+	],
+	'9' : [
+		{
+			"quote": "What'd you think, I'd wake up and we'd go for tea? You tried to gut me, Blondie",
+			"season": "4"
+		},
+		{
+			"quote": "I wake up to find this blond chick isn't even dating the guy she was so nuts about before. I mean, she's moved on to the first college beefstick she meets. And not only has she forgotten about the love of her life, she's forgotten all about the chick she nearly killed for him. So that's my dream. That and some stuff about cigars and a tunnel",
+			"season": "4"
+		},
+		{
+			"quote": "Payback's a bitch",
+			"season": "4"
+		},
+		{
+			"quote": "Anyway, for real now, I'm gonna ask you something, and you gotta promise you'll be honest and not spare my feelings just 'cause I could kill you. You promise?",
+			"season": "4"
+		},
+		{
+			"quote": "I was thinking about looking up the guy with the bull-whip. Long incarceration",
+			"season": "7"
+		},
+		{
+			"quote": "I didn't come here to take anything away from you, but I'm not gonna be your little lapdog, either",
+			"season": "7"
+		},
+		{
+			"quote": "Something's killing girls all over the world trying to end the Slayer line. Thing like that, figure I might get a heads-up",
+			"season": "7"
+		},
+		{
+			"quote": "Well, that makes me feel better about me. Worse about Giles. Kind of shaky about you",
+			"season": "7"
+		},
+		{
+			"quote": "Every guy's got some whack fantasy. Scratch the surface of any granola type, dude, naughty nurses and horny cheerleader",
+			"season": "7"
+		},
+		{
+			"quote": "You know me -- all about the good deeds",
+			"season": "7"
+		},
+		{
+			"quote": "I don't know if I can lead. But the real question is: can you follow?",
+			"season": "7"
+		},
+		{
+			"quote": "I'm an ex-con who didn't finish high school",
+			"season": "7"
+		},
+		{
+			"quote": "Looks like the Hellmouth is officially closed for business",
+			"season": "7"
+		}
+	],
 };
 
 

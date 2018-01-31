@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { func, shape, arrayOf, string, objectOf, array, object } from 'prop-types';
 import './App.css';
 
-import { quotes, seasons, chars} from './quotes/bq';
+import Header from './components/Header';
+import FormSelect from './components/FormSelect';
+
+import { quotes, seasons, chars, images } from './quotes/bq';
 
 
 const withBuffyQuotes = (UnWrappedComponent) => {
@@ -16,8 +19,8 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 			seasons,
 			chars,
 			filters : {
-				id : '6',
-				season : '1'
+				id : '',
+				season : ''
 			},
 			selectedQuotes : {}
 		};
@@ -167,53 +170,130 @@ class CharSelector extends Component {
 	}
 }
 
+const FilterSelector = (props) => {
+
+	const { id, name, label, update, options, defaultValue, defaultOption } = props;
+
+	return (
+		<div className="c-filter-selectors">
+			<label htmlFor={ id } className="o-label o-label--left">{ label }</label>
+			<FormSelect
+				nameValue={ name }
+				idValue={ id }
+				onUpdate={ update }
+				options={ options }
+				defaultValue={ defaultValue }
+				defaultOption={ defaultOption }
+			/>
+		</div>
+	);
+
+};
+
+FilterSelector.propTypes = {
+	id : string.isRequired,
+	name : string.isRequired,
+	label : string.isRequired,
+	update : func.isRequired,
+	options : arrayOf(shape({
+		label : string,
+		value : string
+	})),
+	defaultValue : string.isRequired,
+	defaultOption : shape({
+		label : string.isRequired,
+		value : string.isRequired
+	}).isRequired
+};
+
 const ShowQuotes = (props) => {
 
 	const { selectedQuotes, seasons, chars, updateFilters, filters } = props;
-
-
 	const quoteChars = Object.keys(selectedQuotes);
-	const showChars = Object.keys(chars).map((key) => chars[key]);
+	const characterOptions = Object.keys(chars).map((key) => {
+		return {
+			value : key,
+			label : chars[key]
+		};
+	});
+	const seasonOptions = seasons.map((season) => {
+		return {
+			value : season,
+			label : `Season ${season}`
+		}
+	});
 
 	return (
-		<div style={{textAlign : 'left'}}>
-			<CharSelector
-				chars={ showChars }
-				value={ filters.id }
-				onUpdate={ updateFilters }
-			/>
-			<SeasonSelector
-				seasons={ seasons }
-				value={ filters.season }
-				onUpdate={ updateFilters }
-			/>
-			{
-				quoteChars.map((quoteChar) => {
-					const name = chars[quoteChar];
-					const hasQuotes = selectedQuotes[quoteChar].length;
+		<div>
+			<fieldset className="o-form-fields">
 
-					if (hasQuotes === 0) {
-						return null;
-					}
+				<div className="o-flex-container o-flex-container--wrap">
+					<h3 className="o-form-fields__title o-flex-container__full">Filter Buffy Quotes</h3>
+					<FilterSelector
+						defaultOption={ {
+							value : '',
+							label : 'All Characters'
+						} }
+						options={ characterOptions }
+						update={ updateFilters }
+						name={ 'id' }
+						defaultValue={ filters.id }
+						label={ 'Character '}
+						id={ 'filterChar' }
+					/>
+					<FilterSelector
+						defaultOption={ {
+							value : '',
+							label : 'All Seasons'
+						} }
+						options={ seasonOptions }
+						update={ updateFilters }
+						name={ 'season' }
+						defaultValue={ filters.season }
+						label={ 'Season '}
+						id={ 'filterSeason' }
+					/>
+				</div>
 
-					return (
-						<div>
-							<h1> {name} </h1>
-							<ul>
-								{
-									selectedQuotes[quoteChar].map((quote) => {
-										return (
-											<li>{ quote.quote } - <strong>Season { quote.season }</strong></li>
-										)
-									})
-								}
-							</ul>
-						</div>
 
-					);
-				})
-			}
-			<button onClick={ () => updateFilters({ id : '1', season : '5' }) }>Filter Quotes</button>
+			</fieldset>
+			<div className="c-buffy-quote">
+				{
+					quoteChars.map((quoteChar) => {
+						const name = chars[quoteChar];
+						const hasQuotes = selectedQuotes[quoteChar].length;
+
+						if (hasQuotes === 0) {
+							return null;
+						}
+
+						return (
+							<div className="c-buffy-quote__entry">
+								<div className="c-buffy-quote__char">
+									<h1 className="c-buffy-quote__title">{ name }</h1>
+									<img
+										className="c-buffy-quote__img"
+										src={ images[quoteChar] }
+									/>
+								</div>
+								<ul className="c-buffy-quote__quotes o-quotes u-no-list">
+									{
+										selectedQuotes[quoteChar].map((quote) => {
+											return (
+												<li className="o-quotes__item">
+													<em className="o-quotes__text">{ quote.quote }</em> <span className="o-quotes__cite">Season { quote.season }</span>
+												</li>
+											)
+										})
+									}
+								</ul>
+							</div>
+
+						);
+					})
+				}
+
+			</div>
 		</div>
 	);
 
@@ -266,11 +346,11 @@ class App extends Component {
 
     return (
       <div className="App">
+	      <Header />
+	      <section className="o-main-layout">
+          <BuffyQuotes stuff="this is some stuff"/>
 
-
-	      <MoreBuffy />
-
-        <BuffyQuotes stuff="this is some stuff"/>
+	      </section>
       </div>
     );
   }

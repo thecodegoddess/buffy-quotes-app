@@ -1,0 +1,22 @@
+@import "scss/utils";
+
+html {
+  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+  & * {
+    //box-sizing: border-box;
+  }
+}
+
+svg {
+  display: inline-block;
+  #handle,
+  #top-swirl-right,
+  #top-swirl-left {
+    display: none;
+
+    @include small {
+      display: initial;
+    }
+  }
+}
