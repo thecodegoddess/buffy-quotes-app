@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { arrayOf, func, string, shape } from 'prop-types';
+import './FormSelect.css';
 
 class FormSelect extends Component {
 	state = {

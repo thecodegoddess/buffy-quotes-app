@@ -1,0 +1,41 @@
+.o-select {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; }
+  .o-select::before, .o-select::after {
+    content: "";
+    position: absolute;
+    pointer-events: none; }
+  .o-select::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    color: #FFF;
+    line-height: 1;
+    top: 50%;
+    right: 1.2em;
+    margin-top: -.5em; }
+  .o-select::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #e8107c; }
+  .o-select__input {
+    background-color: #f0e6eb;
+    border-radius: 3px;
+    font-size: inherit;
+    padding: .5em;
+    border: 0;
+    padding-right: 2.5em;
+    margin: 0;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none; }
+    .o-select__input::-ms-expand {
+      display: none; }
+    .o-select__input:focus {
+      outline: 1px solid red;
+      outline-offset: -1px; }

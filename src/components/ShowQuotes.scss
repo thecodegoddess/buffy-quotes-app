@@ -1,0 +1,84 @@
+@import "../scss/utils";
+@import "../scss/o-quotes";
+
+.c-show-quote {
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+
+  &__entry {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(66, 66, 66, 0.25);
+    //margin: 15px 15px 35px;
+    margin-bottom: 35px;
+    background-color: #efebef;
+    box-shadow: 3px 3px 5px rgba(103, 52, 155, 0.1);
+
+    @include med {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    @include lg {
+      flex-direction: row-reverse;
+    }
+
+
+  }
+
+
+  &__title {
+    margin-top: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 1px 0 0 black, 0 -1px 0 0 black;
+
+    @include med {
+      box-shadow: none;
+      @include background-svg($svg);
+      background-repeat: no-repeat;
+      background-position: left;
+      background-size: contain;
+      padding-left: 60px;
+    }
+
+    @include lg {
+      text-align: right;
+      padding-left: auto;
+      padding-right: 70px;
+      background-position: right;
+    }
+  }
+
+  &__img {
+  }
+
+  &__char {
+    display: flex;
+    flex-direction: column;
+
+    @include med {
+      flex: 0 0 35%;
+      padding: 15px;
+    }
+
+    @include lg {
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+
+      .c-buffy-quote__entry:nth-child(odd) > & {
+        order: 2;
+      }
+    }
+  }
+
+  &__quotes {
+
+    @include med {
+      flex: 1 1 auto;
+    }
+
+  }
+}

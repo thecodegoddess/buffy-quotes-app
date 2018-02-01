@@ -1,0 +1,65 @@
+@import "./utils";
+.o-quotes {
+  font-size: 1.5rem;
+
+  @include med {
+    font-size: 1rem;
+  }
+
+  &__item {
+    padding: 10px;
+    border: 1px solid rebeccapurple;
+    margin-bottom: 20px;
+    background-color: rgba(103, 52, 155, 0.25);
+    transition: transform 200ms,
+    box-shadow 200ms,
+    background-color 200ms;
+    transition-delay: 25ms;
+    cursor: default;
+
+    &:hover {
+      transform: translate(-5px);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+      background-color: rgba(103, 52, 155, 0.35);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+  &__text {
+    // position: relative;
+    // padding: 0 20px;
+    line-height: 1.25;
+
+    &::before,
+    &::after {
+      font-size: 1.5em;
+      vertical-align: middle;
+
+      // position: absolute;
+    }
+
+    &::before {
+      content: "\201C";
+      padding-right: 0.15em;
+      // top: 0;
+      // left: 0;
+    }
+
+    &::after {
+      content: "\201D";
+      padding-left: 0.1em;
+      // bottom: 0;
+      // right: 0;
+    }
+  }
+  &__cite {
+    font-size: 0.75em;
+    color: #550f55;
+    white-space: nowrap;
+    display: block;
+  }
+}

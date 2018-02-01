@@ -4,12 +4,6 @@ html {
 
 svg {
   display: inline-block; }
-  svg #handle,
-  svg #top-swirl-right,
-  svg #top-swirl-left {
-    display: none; }
-    @media (min-width: 640px) {
-      svg #handle,
-      svg #top-swirl-right,
-      svg #top-swirl-left {
-        display: initial; } }
+
+img {
+  width: 100%; }

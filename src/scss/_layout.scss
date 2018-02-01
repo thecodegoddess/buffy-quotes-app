@@ -1,0 +1,29 @@
+.o-main-layout {
+  margin: 20px;
+}
+
+.o-flex-container {
+  display: flex;
+
+  &__full {
+    flex: 0 1 100%;
+
+  }
+
+  /* Modifiers */
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--even {
+    justify-content: space-evenly;
+  }
+
+  &--around {
+    justify-content: space-around;
+  }
+
+  &--between {
+    justify-content: space-between;
+  }
+}

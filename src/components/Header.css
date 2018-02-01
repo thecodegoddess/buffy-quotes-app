@@ -1,0 +1,37 @@
+.c-heading {
+  font-family: "Covered By Your Grace", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  justify-content: space-around;
+  padding: 15px;
+  background: #2b2828;
+  color: whitesmoke;
+  box-shadow: 0px 3px 5px 2px #7b7485;
+  margin-bottom: 20px; }
+  @media (min-width: 768px) {
+    .c-heading {
+      flex-direction: row;
+      justify-content: space-evenly; } }
+  @media (min-width: 1024px) {
+    .c-heading {
+      font-size: 2em;
+      justify-content: center; } }
+  .c-heading__title {
+    padding: 10px; }
+    @media (min-width: 1024px) {
+      .c-heading__title {
+        padding-left: 2em;
+        text-shadow: 1px 1px 1px black, 2px 2px 2px deeppink; } }
+  .c-heading__logo {
+    width: 30%;
+    transition: color 200ms, width 200ms; }
+    @media (min-width: 768px) {
+      .c-heading__logo {
+        width: 20%; } }
+    @media (min-width: 1024px) {
+      .c-heading__logo {
+        width: 10%; } }
+    .c-heading__logo:hover {
+      color: #7b1010; }

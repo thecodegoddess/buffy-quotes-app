@@ -1,10 +1,18 @@
 import React from 'react';
 import FormSelect from './FormSelect';
 import { arrayOf, func, shape, string } from 'prop-types';
+import './FilterSelector.css';
 
 const FilterSelector = (props) => {
 
-	const { id, name, label, update, options, defaultValue, defaultOption } = props;
+	const { id,
+		name,
+		label,
+		update,
+		options,
+		defaultValue,
+		defaultOption
+	} = props;
 
 	return (
 		<div className="c-filter-selectors">

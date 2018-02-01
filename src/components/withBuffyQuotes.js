@@ -24,7 +24,7 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 		}
 
 		updateFilters = (filters) => {
-			const newFilters = {...this.state.filters, ...filters};
+			const newFilters = {...this.state.filters, ...filters };
 
 			newFilters.id = (newFilters.id === '') ? 'all' : newFilters.id;
 
@@ -41,7 +41,6 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 
 		filterQuotes = ({ id, season } = {})  => {
 
-			// console.log('%c id and season', 'font-size: 20px; color: deeppink', id, season);
 
 			if ( id === '' && season === '') {
 				return null;
