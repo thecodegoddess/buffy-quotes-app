@@ -15,11 +15,17 @@ class FormSelect extends Component {
 		})).isRequired,
 		defaultValue : string,
 		idValue : string,
-		defaultOption : shape({
+		defaultOption : arrayOf(shape({
 			value : string.isRequired,
 			label : string.isRequired
-		}),
+		})),
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.defaultValue !== this.state.value) {
+			this.setState({ value : nextProps.defaultValue })
+		}
+	}
 
 	handleSeasonUpdate = ({ target }) => {
 
@@ -38,6 +44,8 @@ class FormSelect extends Component {
 	}
 
 	render() {
+		console.log('this.props.defaultValue', this.props.defaultValue || '')
+		console.log('this.state.value', this.state.value)
 
 		const { options, defaultOption, idValue, nameValue } = this.props;
 
@@ -50,7 +58,7 @@ class FormSelect extends Component {
 					className="o-select__input"
 					onChange={ this.handleSeasonUpdate }
 				>
-					{ defaultOption ? (FormSelect.createDefault(defaultOption)) : null }
+					{ defaultOption ? (defaultOption.map((opt) => FormSelect.createDefault(opt))) : null }
 					{
 						options.map((option) => {
 							return (<option
