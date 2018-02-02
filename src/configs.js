@@ -13,3 +13,5 @@ export const SEASON_DEFAULT_OPTS = [{
 	value : '',
 	label : 'Select a Season'
 }];
+
+export const DELAY = 2000;

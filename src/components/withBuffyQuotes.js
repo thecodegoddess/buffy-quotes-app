@@ -1,5 +1,6 @@
 import { chars, quotes, seasons, images } from '../quotes/bq';
 import React, { Component } from 'react';
+import getBuffyQuotes from '../api/buffyQuotesMock';
 
 const withBuffyQuotes = (UnWrappedComponent) => {
 
@@ -8,10 +9,10 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 		static displayName = `withBuffyQuotes(${ UnWrappedComponent.displayName || UnWrappedComponent.name })`;
 
 		state = {
-			quotes,
-			seasons,
-			chars,
-			images,
+			quotes : {},
+			seasons : [],
+			chars : {},
+			images : {},
 			filters : {
 				id : '',
 				season : ''
@@ -20,7 +21,13 @@ const withBuffyQuotes = (UnWrappedComponent) => {
 		};
 
 		componentDidMount() {
-			this.filterQuotes(this.state.filters);
+
+			getBuffyQuotes().then((quotes) => {
+
+				this.setState({ ...this.state, ...quotes });
+
+			});
+
 		}
 
 		updateFilters = (filters) => {
