@@ -1,3 +1,7 @@
+export const QUOTES_FILTER = 'QUOTES_FILTER';
+export const QUOTES_GET = 'QUOTES_GET';
+export const QUOTES_RETURN = 'QUOTES_RETURN';
+
 export const CHAR_DEFAULT_OPTS = [{
 	value : '',
 	label : 'Select a Character'

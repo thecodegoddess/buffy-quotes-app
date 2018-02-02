@@ -1,23 +1,9 @@
 import { createStore, compose, combineReducers } from 'redux';
-import {
-	quotes,
-	seasons,
-	images,
-	filters,
-	selectedQuotes,
-	chars
-} from './reducers';
+import rootReducer from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
 
-const store = createStore(combineReducers({
-	quotes,
-	seasons,
-	images,
-	filters,
-	selectedQuotes,
-	chars
-}), {
+const defaultState = {
 	images : {},
 	chars : {},
 	seasons : [],
@@ -25,9 +11,10 @@ const store = createStore(combineReducers({
 	filters : {
 		id : '',
 		season : ''
-	},
-	selectedQuotes : {}
+	}
 
-}, composeEnhancers());
+}
+
+const store = createStore(rootReducer, defaultState, composeEnhancers());
 
 export default store;
