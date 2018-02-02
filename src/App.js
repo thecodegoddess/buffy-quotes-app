@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import getBuffyQuotes from './api/buffyQuotesMock';
 import store from './store';
-import { getQuotes, filterQuotes, returnQuotes} from './actions';
+import { getQuotes, filterQuotes, returnQuotes } from './actions';
 import './App.css';
 import Header from './components/Header';
 import ShowQuotes from './components/ShowQuotes';
 import withBuffyQuotes from './components/withBuffyQuotes';
 
+import WithBuffyQuotes from './containers/WithBuffyQuotes';
+// import { returnQuotes } from './actions';
+
 import { chars, quotes, seasons, images } from './quotes/bq';
 
 
 window.storeB = store;
-const BuffyQuotes = withBuffyQuotes(ShowQuotes);
+// const BuffyQuotes = withBuffyQuotes(ShowQuotes);
 
 class App extends Component {
 
-	test = () => {
-		store.dispatch(returnQuotes({ chars, quotes, seasons, images }));
-	};
-	test2 = () => {
-		store.dispatch(filterQuotes('id', '2'));
-	};
+	componentDidMount() {
+		store.dispatch(returnQuotes({ chars, quotes, seasons, images }))
+	}
 
 	render() {
 
 		return (
-			<div className="App">
-				<button onClick={ this.test }>get stuff</button>
-				<button onClick={ this.test2 }>get stuff 2</button>
-
-				<section className="o-main-layout">
-					<BuffyQuotes show="Buffy"/>
-				</section>
-			</div>
+			<Provider store={ store }>
+				<div className="App">
+					<Header />
+					<section className="o-main-layout">
+						<WithBuffyQuotes show="BTVS"/>
+					</section>
+				</div>
+			</Provider>
 		);
 	}
 }

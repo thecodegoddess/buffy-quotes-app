@@ -30,5 +30,10 @@ export function selectedQuotes(state = {}, action) {
 }
 
 export function filters(state = {}, action) {
+	console.log('action', action)
+
+	if (action.type === ACTIONS.FILTER_QUOTES) {
+		return { ...state, [action.name] : action.value }
+	}
 	return state;
 }

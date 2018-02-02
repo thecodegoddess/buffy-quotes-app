@@ -9,10 +9,22 @@ import {
 	string
 } from 'prop-types';
 import FilterSelector from './FilterSelector';
-import  './FilterSelector.css';
+import  './ShowQuotes.css';
 import { CHAR_DEFAULT_OPTS, SEASON_DEFAULT_OPTS } from '../configs';
 
 class ShowQuotes extends Component {
+	static defaultProps = {
+		show : '',
+		selectedQuotes : {},
+		seasons : [],
+		chars : {},
+		images : {},
+		updateFilters : () => {},
+		filters : {
+			id : '',
+			season : ''
+		}
+	};
 
 	static propTypes = {
 		show : string.isRequired,

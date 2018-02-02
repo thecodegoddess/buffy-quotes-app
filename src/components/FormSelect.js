@@ -34,9 +34,10 @@ class FormSelect extends Component {
 			value : target.value
 		});
 
-		this.props.onUpdate({
-			[target.name] : target.value
-		});
+		// this.props.onUpdate({
+		// 	[target.name] : target.value
+		// });
+		this.props.onUpdate(target.name, target.value);
 
 	};
 
