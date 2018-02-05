@@ -13,6 +13,7 @@ import  './ShowQuotes.css';
 import { CHAR_DEFAULT_OPTS, SEASON_DEFAULT_OPTS } from '../configs';
 
 class ShowQuotes extends Component {
+
 	static defaultProps = {
 		show : '',
 		selectedQuotes : {},
@@ -20,10 +21,16 @@ class ShowQuotes extends Component {
 		chars : {},
 		images : {},
 		updateFilters : () => {},
+		getQuotes : () => {},
 		filters : {
 			id : '',
 			season : ''
 		}
+	};
+
+	state = {
+		characterOptions : [],
+		seasonOptions : []
 	};
 
 	static propTypes = {
@@ -33,10 +40,64 @@ class ShowQuotes extends Component {
 		chars : object.isRequired,
 		images : object.isRequired,
 		updateFilters : func.isRequired,
+		getQuotes : func.isRequired,
 		filters : shape({
 			id : string,
 			season : string
 		}).isRequired
+	};
+
+	componentDidMount() {
+
+		this.props.getQuotes();
+
+	}
+
+	quotesDisplay = () => {
+
+
+
+	};
+
+	characterDisplay = (quoteObject) => {
+
+		const {
+			selectedQuotes,
+			chars,
+			images,
+		} = this.props;
+
+		const name = chars[quoteObject];
+		const hasQuotes = selectedQuotes[quoteObject].length;
+
+		if (hasQuotes === 0) {
+			return null;
+		}
+
+		return (
+			<div className="c-show-quote__entry" key={ name }>
+				<div className="c-show-quote__char">
+					<h1 className="c-show-quote__title">{ name }</h1>
+					<img
+						alt={ name }
+						className="c-show-quote__img"
+						src={ images[quoteObject] }
+					/>
+				</div>
+				<ul className="c-show-quote__quotes o-quotes u-no-list">
+					{
+						selectedQuotes[quoteObject].map((quote, idx) => {
+							return (
+								<li className="o-quotes__item" key={ `${name}_${idx}` }>
+									<em className="o-quotes__text">{ quote.quote }</em> <span className="o-quotes__cite">Season { quote.season }</span>
+								</li>
+							)
+						})
+					}
+				</ul>
+			</div>
+
+		);
 	};
 
 	render() {
@@ -47,29 +108,30 @@ class ShowQuotes extends Component {
 			chars,
 			updateFilters,
 			filters,
-			images,
 			show
 		} = this.props;
 
-		// const quoteChars = Object.keys(selectedQuotes);
 		const characterOptions = Object.keys(chars).map((key) => {
+
 			return {
 				value : key,
 				label : chars[key]
 			};
+
 		});
 
 		const seasonOptions = seasons.map((season) => {
+
 			return {
 				value : season,
 				label : `Season ${season}`
 			}
+
 		});
 
 		return (
 			<div>
 				<fieldset className="o-form-fields">
-
 					<div className="o-flex-container o-flex-container--wrap">
 						<h3 className="o-form-fields__title o-flex-container__full">Filter { show } Quotes</h3>
 						<FilterSelector
@@ -91,49 +153,15 @@ class ShowQuotes extends Component {
 							id={ 'filterSeason' }
 						/>
 					</div>
-
-
 				</fieldset>
 				<div className="c-show-quote">
-					{
-						Object.keys(selectedQuotes).map((quoteObject) => {
-							const name = chars[quoteObject];
-							const hasQuotes = selectedQuotes[quoteObject].length;
-
-							if (hasQuotes === 0) {
-								return null;
-							}
-
-							return (
-								<div className="c-show-quote__entry">
-									<div className="c-show-quote__char">
-										<h1 className="c-show-quote__title">{ name }</h1>
-										<img
-											className="c-show-quote__img"
-											src={ images[quoteObject] }
-										/>
-									</div>
-									<ul className="c-show-quote__quotes o-quotes u-no-list">
-										{
-											selectedQuotes[quoteObject].map((quote) => {
-												return (
-													<li className="o-quotes__item">
-														<em className="o-quotes__text">{ quote.quote }</em> <span className="o-quotes__cite">Season { quote.season }</span>
-													</li>
-												)
-											})
-										}
-									</ul>
-								</div>
-
-							);
-						})
-					}
-
+					{ Object.keys(selectedQuotes).map(this.characterDisplay) }
 				</div>
 			</div>
 		);
+
 	}
+
 }
 
 export default ShowQuotes;
