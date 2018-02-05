@@ -57,7 +57,8 @@
     margin-top: 3px;
     padding-top: 10px;
     padding-bottom: 10px;
-    box-shadow: 0 1px 0 0 black, 0 -1px 0 0 black; }
+    box-shadow: 0 1px 0 0 black, 0 -1px 0 0 black;
+    text-transform: capitalize; }
     @media (min-width: 768px) {
       .c-show-quote__title {
         box-shadow: none;

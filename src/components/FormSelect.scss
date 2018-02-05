@@ -42,6 +42,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
+    text-transform: capitalize;
 
     &::-ms-expand {
       display: none;
@@ -54,5 +55,6 @@
 
   }
 
-  &__option {}
+  &__option {
+  }
 }

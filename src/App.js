@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
 import './App.css';
-
 import Header from './components/Header';
-import ShowQuotes from './components/ShowQuotes';
-import withBuffyQuotes from './components/withBuffyQuotes';
-
-const BuffyQuotes = withBuffyQuotes(ShowQuotes);
+import WithBuffyQuotes from './containers/WithBuffyQuotes';
 
 class App extends Component {
 
 	render() {
 
 		return (
-			<div className="App">
-				<Header/>
-				<section className="o-main-layout">
-					<BuffyQuotes show="Buffy"/>
-				</section>
-			</div>
+			<Provider store={ store }>
+				<div className="App">
+					<Header />
+					<section className="o-main-layout">
+						<WithBuffyQuotes show="BTVS"/>
+					</section>
+				</div>
+			</Provider>
 		);
+
 	}
+
 }
 
 export default App;
