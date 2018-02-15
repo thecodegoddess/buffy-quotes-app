@@ -53,12 +53,6 @@ class ShowQuotes extends Component {
 
 	}
 
-	quotesDisplay = () => {
-
-
-
-	};
-
 	characterDisplay = (quoteObject) => {
 
 		const {

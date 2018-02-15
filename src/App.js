@@ -12,7 +12,7 @@ class App extends Component {
 		return (
 			<Provider store={ store }>
 				<div className="App">
-					<Header />
+					<Header title="Buffy Quotes App" />
 					<section className="o-main-layout">
 						<WithBuffyQuotes show="BTVS"/>
 					</section>

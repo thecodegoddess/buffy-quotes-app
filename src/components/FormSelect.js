@@ -39,7 +39,7 @@ class FormSelect extends Component {
 
 	}
 
-	handleSeasonUpdate = ({ target }) => {
+	handleOnChange = ({ target }) => {
 
 		this.setState({
 			value : target.value
@@ -71,7 +71,7 @@ class FormSelect extends Component {
 					id={ idValue || '' }
 					value={ this.state.value }
 					className="o-select__input"
-					onChange={ this.handleSeasonUpdate }
+					onChange={ this.handleOnChange }
 				>
 					{
 						defaultOption ?

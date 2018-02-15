@@ -1,9 +1,12 @@
 {
-  "name": "buffy quotes app",
+  "name": "buffy-quotes-app",
   "version": "0.1.0-alpha",
   "private": true,
   "homepage": "http://www.thecodegoddess.com/buffy",
   "dependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^4.2.0",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
@@ -11,6 +14,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
+    "react-test-renderer": "^16.2.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
