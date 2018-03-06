@@ -20,5 +20,5 @@ const props = {
 it('Show Quotes', () => {
 	const wrapper = shallow(<Component { ...props }/>);
 	// console.log(expect(wrapper.find('FilterSelector')).toMatchElement(<FilterSelector />));
-	console.log(wrapper.find('FilterSelector')[0].debug());
+	expect(wrapper.find('FilterSelector')).toHaveLength(2);
 });

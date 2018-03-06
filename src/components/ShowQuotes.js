@@ -53,7 +53,7 @@ class ShowQuotes extends Component {
 
 	}
 
-	characterDisplay = (quoteObject) => {
+	characterDisplay = (quoteObject, idx) => {
 
 		const {
 			selectedQuotes,
@@ -69,7 +69,7 @@ class ShowQuotes extends Component {
 		}
 
 		return (
-			<div className="c-show-quote__entry" key={ name }>
+			<div className="c-show-quote__entry" key={ `${name}_${idx}` }>
 				<div className="c-show-quote__char">
 					<h1 className="c-show-quote__title">{ name }</h1>
 					<img
